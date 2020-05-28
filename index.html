@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory game </title>
+    <style>
+        body {
+            background-color: #ffccff;
+            position: absolute;
+            margin-left: 370px;
+            margin-right: -300px;
+        }
+
+        h1 {
+            font-size: 50px;
+            text-align: center;
+            color: purple;
+        }
+
+        .card {
+            background-color: plum;
+            border: purple 1px solid;
+            margin: 5px;
+        }
+
+        img {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<h1> Memory game</h1>
+
+<body>
+    <div style="display: flex;">
+        <div class="card" onclick="showCard(event)">
+            <img src="images/bel.png" id="bel" class="bel" width="200" height="250">
+        </div>
+        <div class="card" onclick="showCard(event)">
+            <img src="images/butiful.png" id="butiful" class="butiful" width="200" height="250">
+        </div>
+        <div class="card" onclick="showCard(event)">
+            <img src="images/elza.png" id="elza" class="elza" width="200" height="250">
+        </div>
+        <div class="card" onclick="showCard(event)">
+            <img src="images/silgia.png" id="silgia" class="silgia" width="200" height="250">
+        </div>
+    </div>
+    <br>
+    <div style="display: flex;">
+        <div class="card" onclick="showCard(event)">
+            <img src="images/silgia.png" id="silgia" class="silgia" width="200" height="250">
+        </div>
+        <div class="card" onclick="showCard(event)">
+            <img src="images/butiful.png" id="butiful" class="butiful" width="200" height="250">
+        </div>
+        <div class="card" onclick="showCard(event)">
+            <img src="images/bel.png" id="bel" class="bel" width="200" height="250">
+        </div>
+        <div class="card" onclick="showCard(event)">
+            <img src="images/elza.png" id="elza" class="elza" width="200" height="250">
+        </div>
+    </div>
+    <script>
+        var counter = 0;
+        var firstCard;
+        var secondCard;
+        var match = 0;
+        var imgs = document.querySelectorAll("img");
+        console.log(imgs);
+
+        var c = imgs.length;
+        
+        var obj = {};
+        for (var i = 0; i < c; i++) {
+            var r = Math.floor(Math.random() * c);
+            obj[i]=imgs[r];
+            delete imgs.r;
+
+        }
+
+        console.log(obj);
+
+        var cards = document.querySelectorAll(".card")
+
+        for (var j = 0; j < obj.length; j++) {
+            cards[j].innerHTML = obj[j];
+
+        }
+
+        function showCard(e) {
+            e.target.querySelector('img').style.visibility = 'visible';
+            counter++
+            if (counter === 1) {
+                firstCard = e.target.querySelector('img');
+            }
+            if (counter === 2) {
+                secondCard = e.target.querySelector('img');
+                checkerMatch(firstCard, secondCard)
+                counter = 0;
+
+            }
+        }
+
+        function checkerMatch(first, second) {
+            if (first.id !== second.id) {
+                setTimeout(function () {
+                    first.style.visibility = 'hidden'
+                    second.style.visibility = 'hidden'
+                }, 500)
+            } else {
+                match++
+                checkeVictory(match)
+            }
+        }
+
+        function checkeVictory(match) {
+            if (match === 4) {
+                setTimeout(function () {
+                    alert('you win!!!!!!!!!!!!')
+                }, 100)
+            } else {
+                return;
+            }
+        }
+
+    </script>
+</body>
+
+</html>
